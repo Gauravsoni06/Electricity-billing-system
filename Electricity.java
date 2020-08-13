@@ -1,8 +1,8 @@
 import java.util.*;
 class Electricity
 {
-	double[] rate={6.35,7.5,9.75,10.80};
-	int[] fixed_charges={30,105};
+	public double[] rate={6.35,7.5,9.75,10.80};
+	public int[] fixed_charges={30,105};
 	String supp;
 	int a;
 	String[] connection={"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
