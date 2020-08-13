@@ -1,8 +1,8 @@
 import java.util.*;
 class Electricity
 {
-	public double[] rate={6.35,7.5,9.75,10.80};
-	public int[] fixed_charges={30,105};
+	public double[] rate={6.35,7.5,9.75,10.80,12.32,15.6,18.5,13.6};
+	public int[] fixed_charges={30,105,115,150,250,300,215};
 	String supp;
 	int a;
 	String[] connection={"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
@@ -82,31 +82,61 @@ class Electricity
 	}
 	public void Non_Domestic(int units)
 	{	
-	
+		double amount;
+		double amt;
+		if(units<=200)
+		{
+			amount=fixed_charges[1]+units*rate[1];
+			System.out.println("amount="+amount);
+		}
+		else
+		{
+			amt=rate[0]*200;
+			amount=fixed_charges[1]+(units-100)*rate[2]+amt;
+			System.out.println("amount="+amount);
+		}
 	}
 	public void Street_Lighting_Service(int units)
 	{
-		
+		double amount;
+		double amt;
+		amount=fixed_charges[3]+units*rate[3];
+		System.out.println("amount="+amount);
 	}
 	public void Agriculture_Service(int units)
 	{
-		
+		double amount;
+		double amt;
+		amount=fixed_charges[4]+units*rate[4];
+		System.out.println("amount="+amount);
 	}
 	public void Small_Industrial_Service(int units)
 	{
-	
+		double amount;
+		double amt;
+		amount=fixed_charges[5]+units*rate[5];
+		System.out.println("amount="+amount);
 	}
 	public void Medium_Industrial_Service(int units)
 	{
-	
+		double amount;
+		double amt;
+		amount=fixed_charges[5]+units*rate[6];
+		System.out.println("amount="+amount);
 	}
 	public void Large_Industrial_Service(int units)
 	{
-	
+		double amount;
+		double amt;
+		amount=fixed_charges[5]+units*rate[7];
+		System.out.println("amount="+amount);
 	}
 	public void Bulk_Supply_for_Mixed_load(int units)
 	{
-	
+		double amount;
+		double amt;
+		amount=fixed_charges[5]+units*rate[7];
+		System.out.println("amount="+amount);
 	} 
 
 	public static void main(String args[])
