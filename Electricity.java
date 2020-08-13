@@ -68,20 +68,16 @@ class Electricity
 	{	
 		double amount;
 		double amt;
-		if(units<=50)
+		if(units<=100)
 		{
 			amount=fixed_charges[0]+units*rate[0];
 			System.out.println("amount="+amount);
 		}
-		else if(units>50&&units<100)
+		else
 		{
-			amt=rate[0]*50;
-			amount=fixed_charges[0]+(units-50)*rate[1]+amt;
+			amt=rate[0]*100;
+			amount=fixed_charges[0]+(units-100)*rate[1]+amt;
 			System.out.println("amount="+amount);
-		}
-		else if(units>100&&units<200)
-		{
-			
 		}
 	}
 	public void Non_Domestic(int units)
