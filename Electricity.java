@@ -1,7 +1,7 @@
 import java.util.*;
-class Electricity
-{	
-	int a;
+public class Electricity 
+{
+    int a;
 	static String board;
 	static String country;
 	Scanner in=new Scanner(System.in);
@@ -15,7 +15,6 @@ class Electricity
 	{
 		board="JVVNL";
 	}
-	
 	static void change_country()
 	{
 		country="USA";
@@ -34,7 +33,7 @@ class Electricity
 		
 		for(int i=0;i<connection.length;i++)
 		{
-			if(connection_type==connection[i])
+			if(connection_type.equals(connection[i]))
 				a=i+1;
 		}
 		conn_type(a,units);
@@ -45,7 +44,7 @@ class Electricity
 		String connection_type=typ;
 		for(int i=0;i<connection.length;i++)
 		{
-			if(connection_type==connection[i])
+			if(connection_type.equals(connection[i]))
 				a=i+1;
 		}
 		conn_type(a,units);
@@ -172,7 +171,7 @@ class Electricity
 		System.out.println("Country: "+country);
 		System.out.println("Board: "+board);
 		System.out.println("Units: "+units);
-		System.out.println("Mount to be paid: "+amount);
+		System.out.println("Amount to be paid: "+amount);
 	}
 	public void Domestic(int units)
 	{	
@@ -188,13 +187,31 @@ class Electricity
 	public void Non_Domestic(int units)
 	{	
 		int ut=units;
-		int[] fixed_charges={285,265,220,200,100};
-		double[] energy_charge={7.15,6.70,6.40,6.10,3.85};
+                System.out.println("enter kw sanctioned load");
+                int kw= in.nextInt();
+		int[] fixed_charges={330,275,230,230};
+		double[] energy_charge={8.80,8.35,8.00,7.55};
 		double amount;
-		amount=calculate(ut,energy_charge);
-		amount=amount+calculate(ut,fixed_charges);
+                if(kw<=5)
+                {
+                    amount=calculate(ut,energy_charge);
+                    amount=amount+calculate(ut,fixed_charges);
+                }
+                else
+                {
+                    amount=calculate(ut,energy_charge);
+                    if(ut>500)
+                    {
+                        amount=amount+kw*105;
+                    }
+                    else
+                    {
+                        amount=amount+kw*95;
+                    }
+                  
+                }
 		display(units,amount);
-	}
+	} 
 	public void Street_Lighting_Service(int units)
 	{
 		int ut=units;
@@ -262,7 +279,7 @@ class Electricity
 		String type_conn="DM";
 		/*change_board();
 		change_country();*/
-		/*Electricity e1=new Electricity();*/
-		Electricity e2=new Electricity(unit,type_conn);						
-	}
+		Electricity e1=new Electricity();
+		/*Electricity e2=new Electricity(unit,type_conn);*/						
+	}    
 }
