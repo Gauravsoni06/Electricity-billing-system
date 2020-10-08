@@ -1,7 +1,55 @@
 import java.util.*;
-public class Electricity 
+import java.lang.*;
+abstract class Cust
 {
-    int a;
+	abstract void addcust();
+	abstract void delete();
+	abstract void update();
+	abstract void displayCustomer();
+}
+
+class Customer extends Cust
+{
+	int id[] =new int[100];
+	String name[]=new String[100];
+	String conn_type[]=new String[100];
+	int units[]=new int[100];
+	Scanner in=new Scanner(System.in);
+	public void addcust()
+	{
+		for(int i=0;i<100;i++)
+		{
+			if(id[i]==0)
+			{
+				id[i]=100+i;
+				System.out.println("enter name");
+				name[i]=in.nextLine();
+				System.out.println("enter connection type");
+				conn_type[i]=in.nextLine();
+				System.out.println("enter units");
+				units[i]=in.nextInt();
+								
+			}
+				
+		}
+		System.out.println("customer added");
+	}
+	public void delete()
+	{
+		System.out.println("customer deleted");
+	}
+	public void update()
+	{
+		System.out.println("customer details updated");
+	}
+	public void displayCustomer()
+	{
+		System.out.println("display");
+	}
+}
+class Billing extends Customer
+{
+	int a;
 	static String board;
 	static String country;
 	Scanner in=new Scanner(System.in);
@@ -20,7 +68,7 @@ public class Electricity
 		country="USA";
 	}
 	
-	Electricity()
+	Billing()
 	{
 		Scanner in=new Scanner(System.in);
 		System.out.println("enter connection type");
@@ -38,16 +86,23 @@ public class Electricity
 		}
 		conn_type(a,units);
 	}
-	Electricity(int u,String typ)
+	Billing(int id)
 	{
-		int units=u;
-		String connection_type=typ;
-		for(int i=0;i<connection.length;i++)
+		for(int i=0;i<100;i++)
 		{
-			if(connection_type.equals(connection[i]))
-				a=i+1;
+			if (super.id[i]==id);
+			{
+				for(int j=0;j<connection.length;i++)
+				{
+					if(super.conn_type[j].equals(connection[j]))
+					a=j+1;
+				}
+				int units=super.units[i];
+				conn_type(a,units);
+				break;
+			}
+			
 		}
-		conn_type(a,units);
 	}
 	public void conn_type(int a,int units)
 	{
@@ -172,6 +227,11 @@ public class Electricity
 		System.out.println("Board: "+board);
 		System.out.println("Units: "+units);
 		System.out.println("Amount to be paid: "+amount);
+		for(int i=0;i<10;i++)
+		{
+			System.out.println("\n");
+		}
+		System.out.println("--------------------------");
 	}
 	public void Domestic(int units)
 	{	
@@ -272,14 +332,74 @@ public class Electricity
 		amount=amount+calculate(ut,fixed_charges);
 		display(units,amount);
 	} 
-	
+}
+
+
+
+final class Main extends Billing
+{
 	public static void main(String args[])
 	{
-		int unit=40;
-		String type_conn="DM";
-		/*change_board();
-		change_country();*/
-		Electricity e1=new Electricity();
-		/*Electricity e2=new Electricity(unit,type_conn);*/						
-	}    
+		if (args[0].equals("run"))
+		{
+			Scanner in=new Scanner(System.in);
+			int i;
+			while(true)
+			{
+				System.out.println("Electricity billing system");
+				System.out.println("choose among the following operation");
+				System.out.println("1. Calculate amount\n2. calculate bill\n3. exit");
+				i=in.nextInt();
+				switch(i)
+				{
+					case 1:
+						System.out.println("1 calculate amount\n2 change country \n3 change board");
+						i= in.nextInt();
+						switch(i)
+						{
+							case 1:
+								
+								Billing b1=new Billing();
+								
+								break;
+							
+							case 2:
+								change_country();
+								break;
+							case 3:
+								change_board();
+						}
+						break;
+					case 2:
+						System.out.println("1.for existing \n2. for new");
+						i=in.nextInt();
+						switch(i)
+						{
+							case 1:
+								System.out.println("enter customer id");
+								i=in.nextInt();
+								Billing b1=new Billing(i);
+								break;
+							case 2:
+								Cust c1=new Customer();
+								c1.addcust();
+								break;
+						}
+						break;
+					case 3:
+						System.exit(0);
+								
+				}
+				
+			
+			}
+		}
+		else 
+		{
+			System.out.println("exiting");
+			System.exit(0);
+		}
+		
+	}
 }
+
