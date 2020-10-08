@@ -51,22 +51,19 @@ class Billing extends Customer
 {
 	int a;
 	static String board;
-	static String country;
+	
+	final String country="INDIA";
 	Scanner in=new Scanner(System.in);
 	String[] connection={"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
 	static
 	{
-		board="AVVNL";
-		country="INDIA";	
+		board="AVVNL";	
 	}
 	static void change_board()
 	{
 		board="JVVNL";
 	}
-	static void change_country()
-	{
-		country="USA";
-	}
+
 	
 	Billing()
 	{
@@ -353,7 +350,7 @@ final class Main extends Billing
 				switch(i)
 				{
 					case 1:
-						System.out.println("1 calculate amount\n2 change country \n3 change board");
+						System.out.println("1 calculate amount\n2 change board");
 						i= in.nextInt();
 						switch(i)
 						{
@@ -362,12 +359,9 @@ final class Main extends Billing
 								Billing b1=new Billing();
 								
 								break;
-							
 							case 2:
-								change_country();
-								break;
-							case 3:
 								change_board();
+								break;
 						}
 						break;
 					case 2:
