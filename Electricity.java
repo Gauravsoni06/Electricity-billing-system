@@ -3,17 +3,16 @@ import java.lang.*;
 abstract class Cust
 {
 	abstract void addcust();
-	abstract void delete();
-	abstract void update();
-	abstract void displayCustomer();
+	abstract void delete(int j);
+	abstract void update(int j);
+	abstract void displayCustomer(int j);
 }
-
 class Customer extends Cust
 {
-	int id[] =new int[100];
-	String name[]=new String[100];
-	String conn_type[]=new String[100];
-	int units[]=new int[100];
+	static int id[] =new int[100];
+	static String name[]=new String[100];
+	static String conn_type[]=new String[100];
+	static int units[]=new int[100];
 	Scanner in=new Scanner(System.in);
 	public void addcust()
 	{
@@ -21,47 +20,83 @@ class Customer extends Cust
 		{
 			if(id[i]==0)
 			{
-				id[i]=100+i;
+				id[i]=100+i+1;
 				System.out.println("enter name");
 				name[i]=in.nextLine();
 				System.out.println("enter connection type");
 				conn_type[i]=in.nextLine();
 				System.out.println("enter units");
 				units[i]=in.nextInt();
-								
-			}
 				
+				System.out.println("id="+id[i]+" addeded");
+				
+				break;
+			}
 		}
 		System.out.println("customer added");
 	}
-	public void delete()
+	public void delete(int j)
 	{
+		for(int i=0;i<100;i++)
+		{
+			if(id[i]==j)
+			{
+				id[i]=0;
+				name[i]="";
+				conn_type[i]="";
+				units[i]=0;
+				break;
+			}
+		}
 		System.out.println("customer deleted");
 	}
-	public void update()
-	{
+	public void update(int j)
+	{	
+		for(int i=0;i<100;i++)
+		{
+			if(id[i]==j)
+			{
+				
+				System.out.println("enter new name");
+				name[i]=in.nextLine();
+				System.out.println("enter connection type");
+				conn_type[i]=in.nextLine();
+				break;
+			}
+		}
 		System.out.println("customer details updated");
 	}
-	public void displayCustomer()
+	public void displayCustomer(int j)
 	{
-		System.out.println("display");
+		for(int i=0;i<100;i++)
+		{
+			if(id[i]==j)
+			{
+				
+				System.out.println("name="+name[i]);
+		
+				System.out.println("\nconnection="+conn_type[i]);
+		
+				System.out.println("\ntotal units="+units[i]);
+			}
+		}
 	}
 }
 class Billing extends Customer
 {
 	int a;
-	static String board;
+	static StringBuffer board=new StringBuffer("");
 	
 	final String country="INDIA";
 	Scanner in=new Scanner(System.in);
-	String[] connection={"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
+	static String[] connection=new String[]{"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
 	static
 	{
-		board="AVVNL";	
+		board.insert(0,"AVVNL");;	
 	}
 	static void change_board()
 	{
-		board="JVVNL";
+		board.replace(0,5,"JVVNL");
 	}
 
 	
@@ -85,14 +120,23 @@ class Billing extends Customer
 	}
 	Billing(int id)
 	{
+		String[] connection1=new String[]{"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
+		System.out.println("id="+id);
 		for(int i=0;i<100;i++)
 		{
 			if (super.id[i]==id);
 			{
-				for(int j=0;j<connection.length;i++)
+				
+				for(int j=0;j<connection1.length;j++)
 				{
-					if(super.conn_type[j].equals(connection[j]))
+					System.out.println("name="+super.name[i]);
+					System.out.println("conn"+super.conn_type[i]);
+					System.out.println("conn1"+connection1[j]);
+					if(super.conn_type[i].equals(connection1[j]))
+					{
 					a=j+1;
+					break;
+					}
 				}
 				int units=super.units[i];
 				conn_type(a,units);
@@ -339,48 +383,100 @@ final class Main extends Billing
 	{
 		if (args[0].equals("run"))
 		{
+			Cust c1=new Customer();
 			Scanner in=new Scanner(System.in);
 			int i;
 			while(true)
 			{
-				System.out.println("Electricity billing system");
-				System.out.println("choose among the following operation");
-				System.out.println("1. Calculate amount\n2. calculate bill\n3. exit");
+				System.out.println("\n--------------Electricity billing system------------\n");
+				System.out.println("\nchoose among the following operation\n");
+				System.out.println("\n1. Calculate amount\n2. calculate bill\n3. to customer options\n4. exit");
 				i=in.nextInt();
 				switch(i)
 				{
 					case 1:
-						System.out.println("1 calculate amount\n2 change board");
-						i= in.nextInt();
-						switch(i)
+						int k=0;
+						while(k==0)
 						{
-							case 1:
-								
-								Billing b1=new Billing();
-								
-								break;
-							case 2:
-								change_board();
-								break;
+							System.out.println("\n1 calculate amount\n2 change board\n3 back");
+							i= in.nextInt();
+							switch(i)
+							{
+								case 1:
+									
+									Billing b1=new Billing();
+									
+									break;
+								case 2:
+									change_board();
+									break;
+								case 3:
+									k=1;
+									break;
+							}
 						}
 						break;
 					case 2:
-						System.out.println("1.for existing \n2. for new");
-						i=in.nextInt();
-						switch(i)
-						{
-							case 1:
-								System.out.println("enter customer id");
-								i=in.nextInt();
-								Billing b1=new Billing(i);
-								break;
-							case 2:
-								Cust c1=new Customer();
-								c1.addcust();
-								break;
+						k=0;
+						while(k==0)
+						{	
+							System.out.println("\n1.for existing \n2. for new\n3. back");
+							i=in.nextInt();
+							switch(i)
+							{
+								case 1:
+									System.out.println("enter customer id");
+									i=in.nextInt();
+									Billing b2=new Billing(i);
+									break;	
+								case 2:
+									c1.addcust();
+									break;
+								case 3:
+									k=1;
+									break;
+							}
 						}
 						break;
 					case 3:
+						k=0;
+						while(k==0)
+						{
+							System.out.println("\n1. for new\n2. to display cutomer details\n3. update customer details\n4. delete customer\n5. back");
+							i=in.nextInt();
+							switch(i)
+							{
+								case 1:
+									
+									c1.addcust();
+									break;
+								case 2:
+									
+									System.out.println("\nenter customer id\n");
+									i=in.nextInt();
+									c1.displayCustomer(i);
+									break;
+								case 3:
+									
+									System.out.println("\nenter customer id\n");
+									i=in.nextInt();
+									c1.update(i);
+									break;
+								case 4:
+									
+									System.out.println("\nenter customer id\n");
+									i=in.nextInt();
+									c1.delete(i);
+									break;
+								case 5:
+									k=1;
+									break;
+						}
+						}
+						
+						break;
+					case 4:
+						System.out.println("exiting");
 						System.exit(0);
 								
 				}
