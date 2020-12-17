@@ -5,7 +5,8 @@
  */
 package newpackage;
 import java.lang.*;
-import java.util.Scanner;
+import java.util.*;
+
 
 /**
  *
@@ -18,7 +19,9 @@ public class bill implements Runnable
 	final static StringBuffer board=new StringBuffer("");
 	final String country="INDIA";
 	Scanner in=new Scanner(System.in);
-	static String[] connection=new String[]{"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
+      
+        
+	String[] connection=new String[]{"DM","NDM","SLS","AG","SIS","MIS","LIS","BSML"};
 	static
 	{
 		board.insert(0,"AVVNL");	
@@ -51,16 +54,12 @@ public class bill implements Runnable
 	{
 		Scanner in=new Scanner(System.in);
 		
-		
-		System.out.println("enter units");
-                int units= in.nextInt();
-                
 		System.out.println("enter connection type");
 		
 		String connection_type=in.nextLine();
-		
-		
-		
+                
+		System.out.println("enter units");
+                int units= in.nextInt();
                     try
                     {
                         for(int i=0;i<connection.length;i++)
