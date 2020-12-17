@@ -9,6 +9,8 @@ class ele extends record
 	{
 		Scanner in=new Scanner(System.in);
 		record r[]=new record[100];
+                
+            
 		int i,id=0,k;
                 while(true)
                 {
@@ -43,6 +45,8 @@ class ele extends record
                                                         case 2:
                                                                 r[id]=new record(id);
                                                                 id=id+1;
+                                                                 
+                                                                   
                                                                 break;
                                                         case 3:
                                                                 k=1;
@@ -58,7 +62,7 @@ class ele extends record
                         }
 
 			
-			}
+		}
 	}
 }
 
